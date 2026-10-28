@@ -1,0 +1,66 @@
+<view class="page">
+  <view class="admin-head">
+    <view class="ah-eyebrow">LUMI HOUSE · 工作室后台</view>
+    <view class="ah-h">今天有 {{openCount}} 场活动在招生</view>
+    <view class="ah-p">线上已收款 ¥{{revenue}} · 累计 {{peopleCount}} 人次报名</view>
+  </view>
+
+  <view class="stat-grid">
+    <view class="stat-box">
+      <view class="sb-k">💛 线上收款</view>
+      <view class="sb-v">{{revenue}}<text class="u">元</text></view>
+      <view class="sb-t">{{paidCount}} 笔已支付</view>
+    </view>
+    <view class="stat-box">
+      <view class="sb-k">🧒 报名人次</view>
+      <view class="sb-v">{{peopleCount}}<text class="u">人</text></view>
+      <view class="sb-t">{{openCount}} 场活动</view>
+    </view>
+    <view class="stat-box">
+      <view class="sb-k">⏳ 待确认</view>
+      <view class="sb-v">{{pendingCount}}<text class="u">笔</text></view>
+      <view class="sb-t {{pendingCount ? 'warn' : ''}}">{{pendingCount ? '需要跟进支付' : '暂无待处理'}}</view>
+    </view>
+    <view class="stat-box">
+      <view class="sb-k">🎯 名额使用</view>
+      <view class="sb-v">{{usage}}<text class="u">%</text></view>
+      <view class="sb-t">全部活动合计</view>
+    </view>
+  </view>
+
+  <view class="admin-sec">
+    <view class="sec-head"><view class="t">需要处理<text class="t-em">TO DO</text></view></view>
+
+    <view wx:if="{{pending.length}}">
+      <view class="task-row" wx:for="{{pending}}" wx:key="id" bindtap="goOrders">
+        <view class="task-dot"></view>
+        <view class="task-body">
+          <text class="n">{{item.childName}} 的报名待支付</text>
+          <text class="m">{{item.evTitle}} · {{item.createdAt}}</text>
+        </view>
+        <view class="task-num">¥{{item.amount}}</view>
+      </view>
+    </view>
+    <view class="card" wx:else style="padding:34rpx;text-align:center;font-size:23rpx;color:#93A5B8">所有订单已处理完 ✨</view>
+
+    <view class="sec-head">
+      <view class="t">近期活动<text class="t-em">SCHEDULE</text></view>
+      <view class="sec-more" bindtap="goAdminEvents">管理 ›</view>
+    </view>
+    <view class="task-row" style="display:block" wx:for="{{upcoming}}" wx:key="id" bindtap="goRegs" data-id="{{item.id}}">
+      <view style="display:flex;align-items:center;gap:18rpx;margin-bottom:14rpx">
+        <text style="font-size:38rpx">{{item.emoji}}</text>
+        <view class="task-body" style="flex:1">
+          <text class="n">{{item.title}}</text>
+          <text class="m">{{item.dateText}} {{item.timeShort}}</text>
+        </view>
+        <view style="font-size:29rpx;font-weight:900;color:#F0632F">{{item.done}}<text style="font-size:19rpx;color:#93A5B8;font-weight:700">/{{item.cap}}</text></view>
+      </view>
+      <view class="seat-track" style="height:11rpx"><view class="seat-fill" style="width:{{item.pct}}%"></view></view>
+    </view>
+
+    <view style="height:30rpx"></view>
+    <button class="btn btn-dark" bindtap="goNew">＋ 发布新活动</button>
+    <view style="height:40rpx"></view>
+  </view>
+</view>

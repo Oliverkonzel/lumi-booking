@@ -1,0 +1,81 @@
+<view class="page">
+  <block wx:if="{{isSingle && ev}}">
+    <view class="page-pad" style="padding-bottom:60rpx">
+      <view class="page-title" style="font-size:34rpx;line-height:1.45">{{ev.title}}</view>
+      <view class="page-sub">{{ev.dateText}} {{ev.time}} · {{ev.place}}</view>
+
+      <view class="stat-grid" style="margin:0 0 34rpx">
+        <view class="stat-box" style="box-shadow:none;width:calc(50% - 9rpx)">
+          <view class="sb-k">已报名</view>
+          <view class="sb-v" style="font-size:36rpx">{{seatsText}}</view>
+        </view>
+        <view class="stat-box" style="box-shadow:none;width:calc(50% - 9rpx)">
+          <view class="sb-k">已收款</view>
+          <view class="sb-v" style="font-size:36rpx">¥{{totalPaid}}</view>
+        </view>
+      </view>
+
+      <block wx:if="{{list.length}}">
+        <view class="reg-row" wx:for="{{list}}" wx:key="id">
+          <view class="reg-ava">{{item.initial}}</view>
+          <view class="reg-body">
+            <text class="n">{{item.childName}} · {{item.childAge}}</text>
+            <text class="m">{{item.level}} · {{item.phone}}</text>
+            <text class="m hot" wx:if="{{item.note}}">备注：{{item.note}}</text>
+          </view>
+          <text wx:if="{{item.status === 'paid'}}" class="badge grass">已支付</text>
+          <view wx:else class="btn-sm primary" bindtap="markPaid" data-id="{{item.id}}">确认</view>
+        </view>
+      </block>
+      <view class="empty" wx:else>
+        <view class="e-ic">🙋</view>
+        <view class="e-t">还没有人报名这场活动</view>
+      </view>
+
+      <button class="btn btn-ghost" style="margin-top:24rpx" bindtap="exportRegs">导出签到表</button>
+    </view>
+  </block>
+
+  <block wx:else>
+    <view class="list-head">
+      <view class="h">报名名单</view>
+      <view class="s">全部 {{list.length}} 条 · 已收款 ¥{{totalPaid}}</view>
+    </view>
+
+    <view style="padding:20rpx 36rpx 60rpx">
+      <view class="stat-grid" style="margin:0 0 30rpx">
+        <view class="stat-box" style="box-shadow:none;width:calc(50% - 9rpx)">
+          <view class="sb-k">已支付</view>
+          <view class="sb-v" style="font-size:36rpx">{{paidCount}}<text class="u">笔</text></view>
+        </view>
+        <view class="stat-box" style="box-shadow:none;width:calc(50% - 9rpx)">
+          <view class="sb-k">待支付</view>
+          <view class="sb-v" style="font-size:36rpx">{{pendingCount}}<text class="u">笔</text></view>
+        </view>
+      </view>
+
+      <block wx:if="{{list.length}}">
+        <view class="reg-row" wx:for="{{list}}" wx:key="id">
+          <view class="reg-ava">{{item.initial}}</view>
+          <view class="reg-body">
+            <view class="n" style="display:flex;align-items:center;gap:10rpx">
+              <text>{{item.childName}}</text>
+              <text class="badge {{item.status === 'paid' ? 'grass' : 'sun'}}">{{item.status === 'paid' ? '已支付' : '待支付'}}</text>
+            </view>
+            <text class="m">{{item.childAge}} · {{item.level}} · {{item.phone}}</text>
+            <text class="m">{{item.evTitle}}</text>
+            <text class="m hot">{{item.evDate}} · ¥{{item.amount}}</text>
+          </view>
+          <view wx:if="{{item.status === 'pending'}}" class="btn-sm primary" bindtap="markPaid" data-id="{{item.id}}">确认</view>
+        </view>
+      </block>
+      <view class="empty" wx:else>
+        <view class="e-ic">🧾</view>
+        <view class="e-t">
+          <view>还没有报名记录</view>
+          <view>家长报名后会出现在这里</view>
+        </view>
+      </view>
+    </view>
+  </block>
+</view>

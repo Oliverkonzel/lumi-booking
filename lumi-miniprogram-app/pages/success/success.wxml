@@ -1,0 +1,27 @@
+<view class="success-wrap" wx:if="{{o && ev}}">
+  <view class="success-ring">✓</view>
+  <view class="success-h2">报名成功</view>
+  <view class="success-sub">
+    <view>已为 {{o.childName}} 锁定 1 个名额</view>
+    <view>开课前一天会短信提醒你</view>
+  </view>
+
+  <view class="ticket">
+    <view class="ticket-head">
+      <view>
+        <view class="tt">{{ev.title}}</view>
+        <text class="cat">{{ev.cat}} · {{ev.level}}</text>
+      </view>
+      <view class="ticket-code">{{o.code}}</view>
+    </view>
+    <view class="ticket-row"><text class="k">活动时间</text><text class="v">{{ev.dateText}} {{ev.time}}</text></view>
+    <view class="ticket-row"><text class="k">活动地点</text><text class="v">{{ev.place}}</text></view>
+    <view class="ticket-row"><text class="k">孩子</text><text class="v">{{o.childName}} · {{o.childAge}}</text></view>
+    <view class="ticket-row"><text class="k">实付金额</text><text class="v" style="color:#F0632F">¥{{o.amount}}</text></view>
+  </view>
+
+  <button class="btn btn-primary" style="margin-bottom:20rpx" bindtap="goOrders">查看我的报名</button>
+  <button class="btn btn-ghost" bindtap="goEvents">再看看其他活动</button>
+
+  <view style="margin-top:auto;padding-top:56rpx;font-size:19rpx;letter-spacing:4rpx;color:#B9C7D6">LUMI HOUSE · PLAY · EXPLORE · GROW</view>
+</view>

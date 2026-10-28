@@ -1,0 +1,117 @@
+<view class="page">
+  <view class="page-pad" style="padding-bottom:60rpx">
+    <view class="page-title">{{isEdit ? '编辑活动' : '发布新活动'}}</view>
+    <view class="page-sub">发布后会立刻出现在家长端的活动列表里</view>
+
+    <view class="field">
+      <view class="field-label">活动名称<text class="req">*</text></view>
+      <input class="input" value="{{form.title}}" bindinput="onInput" data-key="title" placeholder="例如：绘本对话式共读 ·「The Gruffalo」" />
+    </view>
+
+    <view class="form-row">
+      <view class="field">
+        <view class="field-label">活动类别</view>
+        <picker range="{{cats}}" value="{{catIndex}}" bindchange="onCat">
+          <view class="picker-box"><text>{{cats[catIndex]}}</text><text class="arrow">▾</text></view>
+        </picker>
+      </view>
+      <view class="field">
+        <view class="field-label">级别</view>
+        <picker range="{{levels}}" value="{{levelIndex}}" bindchange="onLevel">
+          <view class="picker-box"><text>{{levels[levelIndex]}}</text><text class="arrow">▾</text></view>
+        </picker>
+      </view>
+    </view>
+
+    <view class="form-row">
+      <view class="field">
+        <view class="field-label">适合年龄</view>
+        <input class="input" value="{{form.age}}" bindinput="onInput" data-key="age" placeholder="3-4 岁" />
+      </view>
+      <view class="field">
+        <view class="field-label">活动时长</view>
+        <input class="input" value="{{form.dur}}" bindinput="onInput" data-key="dur" placeholder="60 分钟" />
+      </view>
+    </view>
+
+    <view class="form-row">
+      <view class="field">
+        <view class="field-label">日期<text class="req">*</text></view>
+        <picker mode="date" value="{{form.date}}" bindchange="onDate">
+          <view class="picker-box"><text>{{form.date || '选择日期'}}</text><text class="arrow">▾</text></view>
+        </picker>
+      </view>
+      <view class="field">
+        <view class="field-label">时间<text class="req">*</text></view>
+        <input class="input" value="{{form.time}}" bindinput="onInput" data-key="time" placeholder="10:00-11:00" />
+      </view>
+    </view>
+
+    <view class="field">
+      <view class="field-label">活动地点</view>
+      <picker range="{{places}}" value="{{placeIndex}}" bindchange="onPlace">
+        <view class="picker-box"><text>{{places[placeIndex]}}</text><text class="arrow">▾</text></view>
+      </picker>
+      <view class="field-hint">默认：大同市华北星城跃动 2 楼</view>
+    </view>
+
+    <view class="form-row">
+      <view class="field">
+        <view class="field-label">单价（元）<text class="req">*</text></view>
+        <input class="input" type="number" value="{{form.price}}" bindinput="onInput" data-key="price" />
+      </view>
+      <view class="field">
+        <view class="field-label">名额上限<text class="req">*</text></view>
+        <input class="input" type="number" value="{{form.capacity}}" bindinput="onInput" data-key="capacity" />
+      </view>
+    </view>
+
+    <view class="field">
+      <view class="field-label">活动封面</view>
+      <view class="cover-picker">
+        <view
+          wx:for="{{emojis}}" wx:key="*this"
+          class="cover-opt {{emojiIndex === index ? 'on' : ''}}"
+          bindtap="pickEmoji" data-i="{{index}}"
+        >{{item}}</view>
+      </view>
+      <view class="cover-picker" style="margin-top:14rpx">
+        <view
+          wx:for="{{palettes}}" wx:key="index"
+          class="cover-opt pal {{palIndex === index ? 'on' : ''}}"
+          style="background:linear-gradient(150deg,{{item[0]}},{{item[1]}})"
+          bindtap="pickPal" data-i="{{index}}"
+        ></view>
+      </view>
+      <view class="field-hint">封面用图形区分活动类型，正式上线可替换为实拍照片</view>
+    </view>
+
+    <view class="field">
+      <view class="field-label">活动介绍</view>
+      <textarea class="textarea" style="min-height:180rpx" value="{{form.intro}}" bindinput="onInput" data-key="intro" placeholder="用两三句话说清楚这场活动孩子会做什么、会有什么感受" />
+    </view>
+
+    <view class="field">
+      <view class="field-label">孩子会收获什么（每行一条）</view>
+      <textarea class="textarea" value="{{form.highlights}}" bindinput="onInput" data-key="highlights" placeholder="每行一条，家长端会显示成打勾的列表" />
+    </view>
+
+    <view class="field">
+      <view class="field-label">带领老师</view>
+      <input class="input" value="{{form.teacher}}" bindinput="onInput" data-key="teacher" />
+    </view>
+
+    <view class="hint-note">
+      <text class="ic">📌</text>
+      <view>
+        <view>家长端显示的名额 = 名额上限 − 已支付订单数。</view>
+        <view>想手动留位，直接调小上限即可。</view>
+      </view>
+    </view>
+
+    <view style="display:flex;gap:18rpx;margin-top:36rpx">
+      <button class="btn btn-ghost" style="flex:1" bindtap="save" data-mode="draft">存草稿</button>
+      <button class="btn btn-primary" style="flex:1.6" bindtap="save" data-mode="open">{{isEdit ? '保存并上线' : '立即发布'}}</button>
+    </view>
+  </view>
+</view>

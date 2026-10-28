@@ -1,0 +1,38 @@
+{
+  "pages": [
+    "pages/home/home",
+    "pages/events/events",
+    "pages/mine/mine",
+    "pages/detail/detail",
+    "pages/signup/signup",
+    "pages/pay/pay",
+    "pages/success/success",
+    "pages/orders/orders",
+    "pages/levels/levels",
+    "pages/admin-home/admin-home",
+    "pages/admin-events/admin-events",
+    "pages/admin-edit/admin-edit",
+    "pages/admin-orders/admin-orders"
+  ],
+  "window": {
+    "navigationBarBackgroundColor": "#FFFFFF",
+    "navigationBarTitleText": "英语探索空间",
+    "navigationBarTextStyle": "black",
+    "backgroundColor": "#F4F9FE",
+    "backgroundTextStyle": "dark"
+  },
+  "tabBar": {
+    "color": "#9AA7B4",
+    "selectedColor": "#2F7FD9",
+    "backgroundColor": "#FFFFFF",
+    "borderStyle": "white",
+    "list": [
+      { "pagePath": "pages/home/home", "text": "首页" },
+      { "pagePath": "pages/events/events", "text": "活动" },
+      { "pagePath": "pages/mine/mine", "text": "我的" }
+    ]
+  },
+  "style": "v2",
+  "sitemapLocation": "sitemap.json",
+  "lazyCodeLoading": "requiredComponents"
+}

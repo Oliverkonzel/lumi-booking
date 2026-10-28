@@ -1,0 +1,70 @@
+<view class="page" wx:if="{{ev}}">
+  <view class="page-pad" style="padding-bottom:60rpx">
+    <view class="page-title">填写报名信息</view>
+    <view class="page-sub">信息只用于本次活动和联系，不会对外公开</view>
+
+    <view class="order-mini">
+      <view class="cover" style="background:linear-gradient(150deg,{{ev.c1}},{{ev.c2}})">
+        <view class="lv-tag">{{ev.level}}</view>
+        <text class="emo">{{ev.emoji}}</text>
+      </view>
+      <view>
+        <view class="om-title">{{ev.title}}</view>
+        <view class="om-meta">{{ev.dateText}} {{ev.time}} · {{ev.level}}</view>
+      </view>
+    </view>
+
+    <view class="field">
+      <view class="field-label">孩子姓名<text class="req">*</text></view>
+      <input class="input" value="{{childName}}" bindinput="onName" placeholder="请输入孩子姓名" />
+    </view>
+
+    <view class="form-row">
+      <view class="field">
+        <view class="field-label">孩子年龄<text class="req">*</text></view>
+        <picker range="{{ages}}" value="{{ageIndex}}" bindchange="onAge">
+          <view class="picker-box">
+            <text>{{ages[ageIndex]}}</text>
+            <text class="arrow">▾</text>
+          </view>
+        </picker>
+      </view>
+      <view class="field">
+        <view class="field-label">当前级别</view>
+        <picker range="{{levels}}" value="{{levelIndex}}" bindchange="onLevel">
+          <view class="picker-box">
+            <text>{{levels[levelIndex]}}</text>
+            <text class="arrow">▾</text>
+          </view>
+        </picker>
+      </view>
+    </view>
+
+    <view class="field">
+      <view class="field-label">家长手机<text class="req">*</text></view>
+      <input class="input" type="number" maxlength="11" value="{{phone}}" bindinput="onPhone" placeholder="用于接收活动通知" />
+      <view class="field-hint">报名成功后，开课前一天会短信提醒</view>
+    </view>
+
+    <view class="field">
+      <view class="field-label">想告诉老师的事（选填）</view>
+      <textarea class="textarea" value="{{note}}" bindinput="onNote" placeholder="孩子的性格、兴趣、过敏史，或者你希望老师留意的地方" />
+    </view>
+
+    <view class="hint-note">
+      <text class="ic">💡</text>
+      <view>
+        <view>第一次来？孩子可以只在旁边看着，不用马上参与。</view>
+        <view>我们不会点名、不会比较，什么时候开口都可以。</view>
+      </view>
+    </view>
+  </view>
+
+  <view class="bottom-bar">
+    <view class="price-box">
+      <view class="p"><text class="cur">¥</text>{{ev.price}}</view>
+      <view class="s">{{ev.level}} · {{ev.dateText}}</view>
+    </view>
+    <button class="btn btn-primary" style="width:auto" bindtap="submit">去支付</button>
+  </view>
+</view>

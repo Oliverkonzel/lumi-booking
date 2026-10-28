@@ -1,0 +1,27 @@
+<view class="page">
+  <view class="page-pad" style="padding-bottom:60rpx">
+    <view class="page-title">7 级分层课程</view>
+    <view class="page-sub">3-9 岁 · 一步一个台阶</view>
+
+    <view class="card" style="padding:10rpx 30rpx 30rpx">
+      <block wx:for="{{levels}}" wx:key="lv">
+        <view class="lv-group" wx:if="{{item.group}}">{{item.group}}</view>
+        <view class="lv-row">
+          <text class="l">{{item.lv}}</text>
+          <text class="a">{{item.age}}</text>
+        </view>
+      </block>
+    </view>
+
+    <view class="hint-note" style="margin-top:26rpx">
+      <text class="ic">💡</text>
+      <view>
+        <view>每个孩子入学前会做一次 20 分钟的语言与性格观察，再定级别。</view>
+        <view>不确定从哪一级开始，可以先约一次免费体验。</view>
+      </view>
+    </view>
+
+    <button class="btn btn-primary" style="margin-top:30rpx" open-type="contact" wx:if="{{false}}"></button>
+    <button class="btn btn-primary" style="margin-top:30rpx" bindtap="call">咨询老师定级别</button>
+  </view>
+</view>

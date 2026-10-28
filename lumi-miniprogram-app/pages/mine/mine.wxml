@@ -1,0 +1,79 @@
+<view class="page">
+  <view class="mine-head">
+    <view class="mine-user">
+      <view class="mine-ava">🧒</view>
+      <view>
+        <view class="name">{{child.name}}</view>
+        <view class="sub">{{child.age}} · {{child.level}} · {{child.parent}}</view>
+      </view>
+    </view>
+  </view>
+
+  <view class="mine-stats">
+    <view class="mine-stat"><view class="v">{{paidCount}}</view><view class="k">已报名</view></view>
+    <view class="mine-stat"><view class="v">{{pendingCount}}</view><view class="k">待支付</view></view>
+    <view class="mine-stat"><view class="v">{{paidCount}}</view><view class="k">待上课</view></view>
+  </view>
+
+  <view class="px">
+    <view class="sec-head">
+      <view class="t">我的报名</view>
+      <view class="sec-more" bindtap="goOrders">全部 ›</view>
+    </view>
+  </view>
+
+  <view style="padding:0 36rpx" wx:if="{{recent.length}}">
+    <view class="order-card" wx:for="{{recent}}" wx:key="id">
+      <view class="order-top">
+        <text class="oid">订单号 {{item.id}}</text>
+        <text class="badge {{item.status === 'paid' ? 'grass' : 'sun'}}">{{item.status === 'paid' ? '已支付' : '待支付'}}</text>
+      </view>
+      <view class="order-body">
+        <view class="cover" style="background:linear-gradient(150deg,{{item.c1}},{{item.c2}})">
+          <view class="lv-tag">{{item.levelTag}}</view>
+          <text class="emo">{{item.emoji}}</text>
+        </view>
+        <view style="flex:1;min-width:0">
+          <view class="ob-title">{{item.title}}</view>
+          <view class="ob-meta">{{item.dateText}}</view>
+        </view>
+      </view>
+      <view class="order-foot">
+        <view class="amt">¥{{item.amount}}</view>
+        <view class="order-acts">
+          <view class="btn-sm" bindtap="goDetail" data-id="{{item.eventId}}">活动详情</view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view class="menu-group">
+    <view class="menu-item" bindtap="showChild">
+      <view class="mi-ic">🧒</view>
+      <view class="mi-t">孩子档案</view>
+      <view class="mi-sub">{{child.age}} · {{child.level}}</view>
+    </view>
+    <view class="menu-item" bindtap="goContact">
+      <view class="mi-ic">💬</view>
+      <view class="mi-t">联系老师</view>
+      <view class="mi-sub">188 5844 4116</view>
+    </view>
+    <view class="menu-item" bindtap="goLevels">
+      <view class="mi-ic">📚</view>
+      <view class="mi-t">课程体系</view>
+      <view class="mi-sub">7 级分层</view>
+    </view>
+    <view class="menu-item" bindtap="goTrial">
+      <view class="mi-ic">🎁</view>
+      <view class="mi-t">预约免费体验</view>
+      <view class="arrow">›</view>
+    </view>
+    <view class="menu-item" bindtap="goAdmin">
+      <view class="mi-ic" style="background:#E9EFF6">🔐</view>
+      <view class="mi-t">工作室管理后台</view>
+      <view class="arrow">›</view>
+    </view>
+  </view>
+
+  <view class="home-foot">LUMI HOUSE · PLAY · EXPLORE · GROW</view>
+</view>

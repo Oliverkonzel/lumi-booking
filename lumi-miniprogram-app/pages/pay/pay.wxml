@@ -1,0 +1,51 @@
+<view class="page" wx:if="{{ev}}">
+  <view class="page-pad" style="padding-bottom:60rpx">
+    <view class="page-title">确认订单</view>
+    <view class="page-sub">支付成功后名额立即锁定</view>
+
+    <view class="order-mini">
+      <view class="cover" style="background:linear-gradient(150deg,{{ev.c1}},{{ev.c2}})">
+        <view class="lv-tag">{{ev.level}}</view>
+        <text class="emo">{{ev.emoji}}</text>
+      </view>
+      <view>
+        <view class="om-title">{{ev.title}}</view>
+        <view class="om-meta">{{ev.dateText}} {{ev.time}} · {{ev.level}}</view>
+      </view>
+    </view>
+
+    <view class="summary-card">
+      <view class="summary-row"><text class="k">孩子姓名</text><text class="v">{{draft.childName}}</text></view>
+      <view class="summary-row"><text class="k">年龄 / 级别</text><text class="v">{{draft.childAge}} · {{draft.level}}</text></view>
+      <view class="summary-row"><text class="k">活动时间</text><text class="v">{{ev.dateText}} {{ev.time}}</text></view>
+      <view class="summary-row"><text class="k">联系电话</text><text class="v">{{draft.phone}}</text></view>
+      <view class="summary-row total"><text class="k">应付金额</text><text class="v">¥{{ev.price}}</text></view>
+    </view>
+
+    <view style="margin:34rpx 0 18rpx;font-size:24rpx;font-weight:700;color:#5D7288">支付方式</view>
+    <view class="pay-method">
+      <view class="pm-ic">¥</view>
+      <view class="pm-b">
+        <text class="n">微信支付</text>
+        <text class="d">推荐使用，即时到账</text>
+      </view>
+      <view class="radio"></view>
+    </view>
+
+    <view class="hint-note" style="margin-top:32rpx">
+      <text class="ic">🔒</text>
+      <view>
+        <view>原型演示环境，不会真实扣款。</view>
+        <view>上线后此处调起真实微信支付。</view>
+      </view>
+    </view>
+  </view>
+
+  <view class="bottom-bar">
+    <view class="price-box">
+      <view class="p"><text class="cur">¥</text>{{ev.price}}</view>
+      <view class="s">共 1 个名额</view>
+    </view>
+    <button class="btn btn-primary" style="width:auto" bindtap="doPay">立即支付</button>
+  </view>
+</view>

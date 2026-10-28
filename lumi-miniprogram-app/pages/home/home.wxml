@@ -1,0 +1,116 @@
+<view class="page">
+  <view class="hero">
+    <view class="hero-eyebrow">LUMI HOUSE · 3–9 岁英语启蒙</view>
+    <view class="hero-h1">
+      <view>在探索中，</view>
+      <view>找到<text class="hl">开口表达</text>的勇气</view>
+    </view>
+    <view class="hero-p">7 级分层课程 · 美籍母语伙伴带领 · 小班 8–10 人</view>
+    <view class="hero-wave"></view>
+  </view>
+
+  <view class="quick-grid">
+    <view class="quick-item" bindtap="goTrial">
+      <view class="qi-ic" style="background:#E4F1FD">🎁</view>
+      <view class="qi-t">约体验</view>
+    </view>
+    <view class="quick-item" bindtap="goLevels">
+      <view class="qi-ic" style="background:#FFF6DF">📚</view>
+      <view class="qi-t">课程体系</view>
+    </view>
+    <view class="quick-item" bindtap="goEvents">
+      <view class="qi-ic" style="background:#EDF7E2">🌿</view>
+      <view class="qi-t">近期活动</view>
+    </view>
+    <view class="quick-item" bindtap="goContact">
+      <view class="qi-ic" style="background:#FFEDE6">💬</view>
+      <view class="qi-t">联系老师</view>
+    </view>
+  </view>
+
+  <view class="px">
+    <view class="sec-head">
+      <view class="t">可以报名<text class="t-em">UPCOMING</text></view>
+      <view class="sec-more" bindtap="goEvents">全部 ›</view>
+    </view>
+  </view>
+
+  <view class="ev-list">
+    <view class="ev-card" wx:for="{{list}}" wx:key="id" bindtap="goDetail" data-id="{{item.id}}">
+      <view class="cover" style="background:linear-gradient(150deg,{{item.c1}},{{item.c2}})">
+        <view class="lv-tag">{{item.level}}</view>
+        <text class="emo">{{item.emoji}}</text>
+      </view>
+      <view class="ev-main">
+        <view class="ev-title">{{item.title}}</view>
+        <view class="ev-meta">📅 {{item.dateText}} {{item.timeShort}}</view>
+        <view class="ev-meta">📍 {{item.place}} · {{item.age}}</view>
+        <view class="ev-foot">
+          <view class="ev-price">¥{{item.price}}<text class="unit">/人</text></view>
+          <view class="seat {{item.full ? 'full' : ''}}">
+            <text wx:if="{{item.full}}">名额已满</text>
+            <text wx:else>剩 <b>{{item.left}}</b> 个名额</text>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view class="px">
+    <view class="sec-head"><view class="t">我们怎么上课<text class="t-em">HOW</text></view></view>
+  </view>
+  <view class="feature-duo">
+    <view class="feature-box blue">
+      <view class="num">80%</view>
+      <view class="lbl">特别设计课程</view>
+      <view class="sub">游戏 · 歌谣 · 场景互动</view>
+    </view>
+    <view class="feature-box orange">
+      <view class="num">20%</view>
+      <view class="lbl">教材 · 绘本</view>
+      <view class="sub">真实语料 · 对话式共读</view>
+    </view>
+  </view>
+
+  <view class="px">
+    <view class="sec-head"><view class="t">7 级分层课程<text class="t-em">LEVELS</text></view></view>
+  </view>
+  <view class="lv-scroll">
+    <view class="lv-card" wx:for="{{levels}}" wx:key="lv" bindtap="goLevels">
+      <text class="lv">{{item.lv}}</text>
+      <text class="age">{{item.age}}</text>
+    </view>
+  </view>
+
+  <view class="quote-card">
+    <view><text style="font-weight:800">不强迫，不比较。</text></view>
+    <view>让孩子先建立信心，再谈表达。</view>
+    <view>我们不是把英语教给孩子，是陪他把想说的话说出口。</view>
+    <view class="who">— 英语探索空间 · 教研组</view>
+  </view>
+
+  <view class="home-foot">PLAY · EXPLORE · GROW</view>
+</view>
+
+<!-- 课程体系弹层 -->
+<view class="overlay" wx:if="{{showLevels}}" bindtap="closeLevels">
+  <view class="sheet" catchtap="stop">
+    <view class="sheet-head">
+      <text>7 级分层课程</text>
+      <text class="x" bindtap="closeLevels">✕</text>
+    </view>
+    <view class="sheet-body">
+      <block wx:for="{{levels}}" wx:key="lv">
+        <view class="lv-group" wx:if="{{item.group}}">{{item.group}}</view>
+        <view class="lv-row">
+          <text class="l">{{item.lv}}</text>
+          <text class="a">{{item.age}}</text>
+        </view>
+      </block>
+      <view class="field-hint" style="margin-top:24rpx">
+        <view>每个孩子入学前会做一次 20 分钟的语言与性格观察，再定级别。</view>
+        <view>不确定从哪一级开始，可以先约一次免费体验。</view>
+      </view>
+    </view>
+  </view>
+</view>

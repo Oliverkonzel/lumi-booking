@@ -1,0 +1,2 @@
+.chip-scroll { width: 100%; white-space: nowrap; }
+.chip-scroll .chip-row { display: inline-flex; }

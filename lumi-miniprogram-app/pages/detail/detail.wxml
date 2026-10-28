@@ -1,0 +1,92 @@
+<view class="page" wx:if="{{ev}}">
+  <view class="detail-cover" style="background:linear-gradient(150deg,{{ev.c1}},{{ev.c2}})">
+    <view class="lv-badge">{{ev.level}} · {{ev.age}}</view>
+    <text class="big-emo">{{ev.emoji}}</text>
+  </view>
+
+  <view class="detail-sheet">
+    <view class="detail-title">{{ev.title}}</view>
+    <view class="tag-line">
+      <text class="badge blue">{{ev.cat}}</text>
+      <text class="badge blue">{{ev.age}}</text>
+      <text class="badge grass">小班 {{ev.capacity}} 人</text>
+    </view>
+
+    <view class="info-grid">
+      <view class="info-row">
+        <view class="ir-ic">📅</view>
+        <view>
+          <view class="ir-k">活动时间</view>
+          <view class="ir-v">{{ev.dateText}} {{ev.time}}<text class="sub">共 {{ev.dur}}</text></view>
+        </view>
+      </view>
+      <view class="info-row">
+        <view class="ir-ic">📍</view>
+        <view>
+          <view class="ir-k">活动地点</view>
+          <view class="ir-v">{{ev.place}}<text class="sub">大同市华北星城跃动 2 楼</text></view>
+        </view>
+      </view>
+      <view class="info-row">
+        <view class="ir-ic">👩‍🏫</view>
+        <view>
+          <view class="ir-k">带领老师</view>
+          <view class="ir-v">{{ev.teacher}}<text class="sub">{{ev.teacherDesc}}</text></view>
+        </view>
+      </view>
+    </view>
+
+    <view class="block" style="padding-bottom:26rpx">
+      <view class="seat-bar">
+        <view class="seat-track"><view class="seat-fill" style="width:{{pct}}%"></view></view>
+        <view class="seat-txt">
+          <text wx:if="{{full}}">名额已满</text>
+          <text wx:else>已报 {{done}}/{{ev.capacity}} · 剩 {{left}} 位</text>
+        </view>
+      </view>
+    </view>
+
+    <view class="block">
+      <view class="b-title">这场活动在做什么</view>
+      <view class="b-p" wx:for="{{introArr}}" wx:key="*this">{{item}}</view>
+    </view>
+
+    <view class="block" wx:if="{{highlights.length}}">
+      <view class="b-title">孩子会收获什么</view>
+      <view class="hl-item" wx:for="{{highlights}}" wx:key="*this">
+        <text class="tick">✓</text><text>{{item}}</text>
+      </view>
+    </view>
+
+    <view class="block" wx:if="{{agenda.length}}">
+      <view class="b-title">当天流程</view>
+      <view class="ag-item" wx:for="{{agenda}}" wx:key="t">
+        <view class="ag-time">{{item.t}}</view>
+        <view class="ag-line">
+          <text class="n">{{item.n}}</text>
+          <text class="d">{{item.d}}</text>
+        </view>
+      </view>
+    </view>
+
+    <view class="block">
+      <view class="b-title">费用与说明</view>
+      <view class="summary-row"><text class="k">单次费用</text><text class="v">¥{{ev.price}} / 人</text></view>
+      <view class="summary-row"><text class="k">费用包含</text><text class="v">课程材料 + 绘本手工</text></view>
+      <view style="margin-top:14rpx">
+        <view class="notice-li" wx:for="{{notes}}" wx:key="*this">{{item}}</view>
+      </view>
+    </view>
+  </view>
+
+  <view class="bottom-bar">
+    <view class="price-box">
+      <view class="p"><text class="cur">¥</text>{{ev.price}}</view>
+      <view class="s" wx:if="{{full}}">可联系老师加入候补</view>
+      <view class="s" wx:else>剩 {{left}} 个名额</view>
+    </view>
+    <button class="btn {{full ? 'btn-ghost' : 'btn-primary'}}" bindtap="startSignup">
+      {{full ? '名额已满 · 候补' : '立即报名'}}
+    </button>
+  </view>
+</view>

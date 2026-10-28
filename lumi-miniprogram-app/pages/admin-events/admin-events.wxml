@@ -1,0 +1,51 @@
+<view class="page">
+  <view class="list-head">
+    <view class="h">活动管理</view>
+    <view class="s">共 {{total}} 场活动</view>
+  </view>
+
+  <view class="filter-sticky">
+    <scroll-view scroll-x class="chip-scroll">
+      <view class="chip-row" style="padding-right:36rpx">
+        <view
+          wx:for="{{filters}}" wx:key="key"
+          class="chip {{active === item.key ? 'on' : ''}}"
+          bindtap="onFilter" data-key="{{item.key}}"
+        >{{item.label}}</view>
+      </view>
+    </scroll-view>
+  </view>
+
+  <view style="padding:6rpx 36rpx 180rpx" wx:if="{{list.length}}">
+    <view class="admin-ev" wx:for="{{list}}" wx:key="id">
+      <view class="admin-ev-top" bindtap="goRegs" data-id="{{item.id}}">
+        <view class="cover" style="background:linear-gradient(150deg,{{item.c1}},{{item.c2}})">
+          <view class="lv-tag">{{item.level}}</view>
+          <text class="emo">{{item.emoji}}</text>
+        </view>
+        <view style="flex:1;min-width:0">
+          <view class="ae-title">{{item.title}}</view>
+          <view class="ae-meta">{{item.dateText}} {{item.timeShort}} · {{item.level}} · {{item.place}}</view>
+          <view class="ae-status">
+            <text class="badge {{item.status === 'open' ? 'grass' : item.status === 'draft' ? 'sun' : 'gray'}}">{{item.statusText}}</text>
+          </view>
+        </view>
+      </view>
+      <view class="admin-ev-bar">
+        <view class="ae-stat">已报 <b>{{item.done}}</b>/{{item.capacity}} · 应收 <b>¥{{item.est}}</b></view>
+        <view class="mini-btns">
+          <view class="btn-sm" bindtap="goRegs" data-id="{{item.id}}">名单</view>
+          <view class="btn-sm" bindtap="goEdit" data-id="{{item.id}}">编辑</view>
+          <view class="btn-sm" bindtap="onToggle" data-id="{{item.id}}">{{item.status === 'open' ? '下架' : '上线'}}</view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view class="empty" wx:else>
+    <view class="e-ic">📋</view>
+    <view class="e-t">这个分类下还没有活动</view>
+  </view>
+
+  <view class="fab" bindtap="goNew">＋</view>
+</view>

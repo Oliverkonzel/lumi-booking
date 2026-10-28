@@ -1,0 +1,49 @@
+<view class="page">
+  <view class="list-head">
+    <view class="h">近期活动</view>
+    <view class="s">选一个孩子会喜欢的下午</view>
+  </view>
+
+  <view class="filter-sticky">
+    <scroll-view scroll-x class="chip-scroll">
+      <view class="chip-row" style="padding-right:36rpx">
+        <view
+          wx:for="{{cats}}" wx:key="key"
+          class="chip {{active === item.key ? 'on' : ''}}"
+          bindtap="onFilter" data-key="{{item.key}}"
+        >{{item.label}}</view>
+      </view>
+    </scroll-view>
+  </view>
+
+  <view class="result-count">共 {{count}} 场活动可报名</view>
+
+  <view class="ev-list" style="padding-bottom:40rpx" wx:if="{{list.length}}">
+    <view class="ev-card" wx:for="{{list}}" wx:key="id" bindtap="goDetail" data-id="{{item.id}}">
+      <view class="cover" style="background:linear-gradient(150deg,{{item.c1}},{{item.c2}})">
+        <view class="lv-tag">{{item.level}}</view>
+        <text class="emo">{{item.emoji}}</text>
+      </view>
+      <view class="ev-main">
+        <view class="ev-title">{{item.title}}</view>
+        <view class="ev-meta">📅 {{item.dateText}} {{item.timeShort}}</view>
+        <view class="ev-meta">📍 {{item.place}} · {{item.age}}</view>
+        <view class="ev-foot">
+          <view class="ev-price">¥{{item.price}}<text class="unit">/人</text></view>
+          <view class="seat {{item.full ? 'full' : ''}}">
+            <text wx:if="{{item.full}}">名额已满</text>
+            <text wx:else>剩 <b>{{item.left}}</b> 个名额</text>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view class="empty" wx:else>
+    <view class="e-ic">🗓️</view>
+    <view class="e-t">
+      <view>这个类别暂时没有活动</view>
+      <view>可以看看其他类别</view>
+    </view>
+  </view>
+</view>
